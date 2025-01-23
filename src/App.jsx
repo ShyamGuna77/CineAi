@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <div className='flex  h-full'>
+      <div className='flex  h-full p-8 mt-8'>
         <CssBaseline />
         <Navbar />
         <main className='grow p-8'>

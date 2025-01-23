@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import {
   AppBar,
   IconButton,
@@ -29,10 +29,15 @@ const Navbar = () => {
       <AppBar
         position="fixed"
         className="bg-gray-900 text-white shadow-lg"
-        sx={{ zIndex: theme.zIndex.drawer + 1 }}
+        sx={{
+          zIndex: theme.zIndex.drawer + 1,
+          width: isMobile ? "100%" : "calc(100% - 256px)",
+          marginLeft: isMobile ? 0 : "256px",
+        }}
       >
-        <Toolbar className="h-[80px] flex justify-between px-4">
-          {/* Show menu icon only on mobile */}
+        <Toolbar
+          className={`h-[60px] flex justify-between px-4 ${isMobile ? "" : ""}`}
+        >
           {isMobile && (
             <IconButton
               color="inherit"
@@ -44,15 +49,12 @@ const Navbar = () => {
             </IconButton>
           )}
 
-          {/* Theme Toggle */}
           <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
             {theme.palette.mode === "dark" ? <MdLightMode /> : <MdDarkMode />}
           </IconButton>
 
-          {/* Search placeholder */}
           {!isMobile && <span className="text-gray-300">Search...</span>}
 
-          {/* Authentication buttons */}
           <div>
             {!isAuthenticated ? (
               <Button
@@ -80,7 +82,6 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Sidebar (Drawer) */}
       <nav>
         {isMobile ? (
           <Drawer
@@ -103,7 +104,7 @@ const Navbar = () => {
               paper: "w-64 bg-gray-800 text-white",
             }}
           >
-            <Sidebar />
+            <Sidebar setMobileOpen={setMobileOpen} />
           </Drawer>
         )}
       </nav>
